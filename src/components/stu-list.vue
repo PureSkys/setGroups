@@ -10,6 +10,7 @@
       <el-scrollbar class="list-scrollbar">
         <div v-if="stu_list.length === 0 && is_upload === true">
           <el-upload
+            ref="uploadRef"
             :auto-upload="false"
             :drag="true"
             :on-change="upload_file"
@@ -100,6 +101,7 @@ const {
   group_switch,
   stu_list_temp,
 } = storeToRefs(useAllData()); // 响应式解构store数据
+const uploadRef = ref(); // 定义上传组件的ref
 const dialogVisible = ref(false); // 定义弹窗的显示状态
 const user_card = ref(null); // 定义用户卡片的ref
 const user_card_height = ref(0); // 定义用户卡片的高度
@@ -182,7 +184,11 @@ const upload_file = async (file) => {
           : null;
       })
       .filter((item) => item && item.姓名); // 过滤掉无效项
-
+    if (nameData.length === 0) {
+      ElMessage.error("文件中没有有效姓名数据,请确保文件中包含姓名列且无合并单元格");
+      uploadRef.value.clearFiles(); // 清空上传文件
+      return;
+    }
     // 更新响应式数据
     stu_list.value = structuredClone(nameData);
     stu_list_temp.value = structuredClone(nameData);
