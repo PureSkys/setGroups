@@ -99,6 +99,9 @@
         </el-scrollbar>
       </div>
       <h2 class="seat-main-podium text-xl font-bold">讲 台</h2>
+      <a href="https://puresky.top/" target="_blank" rel="noopener noreferrer" class="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-sm text-gray-500 hover:text-red-500 transition-colors duration-200">
+        <h3>Developer — Cyon</h3>
+      </a>
     </main>
     <ColorContextMenu ref="menu" @color-selected="updateItemColor" />
   </div>
@@ -211,7 +214,7 @@ const updateItemColor = ({ color, item }) => {
 // 重置仓库数据
 const restStore = () => {
   allDataStore.$reset();
-  row.value = 7;
+  row.value = 8;
   column.value = 6;
   setTimeout(() => {
     seat_list.value = Array.from({ length: 42 }, () => []);
@@ -414,7 +417,7 @@ const randomSeat = () => {
       background-color: #e3e3e3;
       margin-left: 15px;
       margin-right: 15px;
-      margin-bottom: 10px;
+      margin-bottom: 25px;
       justify-content: center;
       align-items: center;
     }
